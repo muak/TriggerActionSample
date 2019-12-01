@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:Sample.Triggers"
+             Title="Main Page"
+             x:Class="Sample.Views.MainPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <BoxView CornerRadius="60" HeightRequest="120" WidthRequest="120" BackgroundColor="Blue" HorizontalOptions="Center" VerticalOptions="Center" Opacity="0">
+                <BoxView.Triggers>
+                    <DataTrigger TargetType="BoxView" Binding="{Binding IsActive.Value}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <local:MoveTriggerAction IsActive="True" />
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <local:MoveTriggerAction IsActive="False" />
+                        </DataTrigger.ExitActions>
+                        <!--<Setter Property="Opacity" Value="1" />-->
+                    </DataTrigger>
+                </BoxView.Triggers>
+            </BoxView>
+        </Grid>
+
+
+        <FlexLayout Grid.Row="1" Direction="Row" JustifyContent="SpaceAround" AlignItems="Center">
+            <Button Text="On" Command="{Binding OnCommand}" />
+            <Button Text="Off" Command="{Binding OffCommand}" />
+        </FlexLayout>
+        
+    </Grid>
+
+</ContentPage>
